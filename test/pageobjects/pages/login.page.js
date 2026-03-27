@@ -1,12 +1,10 @@
+import BasePage from "./base.page.js";
 import { LoginBoxComponent } from "../components/login-box.component.js";
 
-class LoginPage {
+class LoginPage extends BasePage {
   constructor() {
+    super("/");
     this.loginBox = new LoginBoxComponent();
-  }
-
-  async open() {
-    await browser.url("/");
   }
 }
 

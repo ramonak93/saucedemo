@@ -6,30 +6,58 @@ UC-2 Handling Latency (Wait Strategies):
  * Logout.
  */
 
+import { LoginPage } from "../pageobjects/pages/login.page.js";
+import { InventoryPage } from "../pageobjects/pages/inventory.page.js";
+import { CartPage } from "../pageobjects/pages/cart.page.js";
+import { CheckoutOnePage } from "../pageobjects/pages/checkout-one.page.js";
+import { BurgerMenuComponent } from "../pageobjects/components/burger-menu.component.js";
+
+const loginPage = new LoginPage();
+const inventoryPage = new InventoryPage();
+const cartPage = new CartPage();
+const checkoutOnePage = new CheckoutOnePage();
+const burgerMenu = new BurgerMenuComponent();
+
 describe("UC-2 Handling Latency (Wait Strategies)", () => {
   beforeEach(async () => {
-    await browser.url("/");
+    await loginPage.open();
   });
 
   it("should login with performance_glitch_user and handle latency gracefully", async () => {
-    await $("#user-name").setValue("performance_glitch_user");
-    await $("#password").setValue("secret_sauce");
-    await $("#login-button").click();
+    await loginPage.loginBox
+      .item("username")
+      .setValue("performance_glitch_user");
+    await loginPage.loginBox.item("password").setValue("secret_sauce");
+    await loginPage.loginBox.item("loginbutton").click();
 
-    await expect(browser).toHaveUrl(expect.stringContaining("inventory.html"));
+    await browser.waitUntil(
+      async () =>
+        (await inventoryPage.productList.rootEl.isDisplayed()) === true,
+      {
+        timeout: 10000,
+        timeoutMsg: "Expected to be on inventory page after login",
+      },
+    );
+    await expect(inventoryPage.productList.rootEl).toBeDisplayed();
   });
 
   it("should reset app state via Burger Menu and logout", async () => {
     // Login with performance_glitch_user
-    await $("#user-name").setValue("performance_glitch_user");
-    await $("#password").setValue("secret_sauce");
-    await $("#login-button").click();
-    // Open Burger Menu
-    await $("#react-burger-menu-btn").click();
+    await loginPage.loginBox
+      .item("username")
+      .setValue("performance_glitch_user");
+    await loginPage.loginBox.item("password").setValue("secret_sauce");
+    await loginPage.loginBox.item("loginbutton").click();
+
+    // Open Burger Menu and wait for menu item
+    await inventoryPage.header.burgerMenuBtn.click();
+    await burgerMenu.rootEl.waitForDisplayed();
+
     // Reset App State
-    await $("#reset_sidebar_link").click();
+    await inventoryPage.burgerMenu.item("resetApp").click();
     // Logout
-    await $("#logout_sidebar_link").click();
+    await inventoryPage.burgerMenu.item("logout").click();
+
     await expect(browser).toHaveUrl("https://www.saucedemo.com/");
   });
 });
