@@ -1,6 +1,6 @@
 import BasePage from "./base.page.js";
-import { Header } from "../components/header.component";
-import { CheckoutInfo } from "../components/checkout-info.component";
+import { Header } from "../components/common/header.component.js";
+import { CheckoutInfo } from "../components/checkout/checkout-info.component.js";
 
 class CheckoutOnePage extends BasePage {
   constructor() {

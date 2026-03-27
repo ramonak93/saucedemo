@@ -1,5 +1,5 @@
 import BasePage from "./base.page.js";
-import { LoginBoxComponent } from "../components/login-box.component.js";
+import { LoginBoxComponent } from "../components/login/login-box.component.js";
 
 class LoginPage extends BasePage {
   constructor() {

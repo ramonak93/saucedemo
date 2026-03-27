@@ -1,7 +1,10 @@
-class LoginBoxComponent {
-  get rootEl() {
-    return $(".login-box");
+import { BaseComponent } from "../base.component.js";
+
+class LoginBoxComponent extends BaseComponent {
+  constructor() {
+    super(".login-box");
   }
+
   item(param) {
     const selectors = {
       username: `#user-name`,

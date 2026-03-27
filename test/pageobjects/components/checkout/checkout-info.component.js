@@ -1,6 +1,8 @@
-class CheckoutInfo {
-  get rootEl() {
-    return $(".checkout_info_container");
+import { BaseComponent } from "../base.component.js";
+
+class CheckoutInfo extends BaseComponent {
+  constructor() {
+    super(".checkout_info_container");
   }
   item(param) {
     const selectors = {

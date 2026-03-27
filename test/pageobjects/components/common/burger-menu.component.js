@@ -1,6 +1,8 @@
-class BurgerMenuComponent {
-  get rootEl() {
-    return $(".bm-item-list");
+import { BaseComponent } from "../base.component.js";
+
+class BurgerMenuComponent extends BaseComponent {
+  constructor() {
+    super(".bm-item-list");
   }
 
   item(param) {

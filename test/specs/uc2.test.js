@@ -10,7 +10,7 @@ import { LoginPage } from "../pageobjects/pages/login.page.js";
 import { InventoryPage } from "../pageobjects/pages/inventory.page.js";
 import { CartPage } from "../pageobjects/pages/cart.page.js";
 import { CheckoutOnePage } from "../pageobjects/pages/checkout-one.page.js";
-import { BurgerMenuComponent } from "../pageobjects/components/burger-menu.component.js";
+import { BurgerMenuComponent } from "../pageobjects/components/common/burger-menu.component.js";
 
 const loginPage = new LoginPage();
 const inventoryPage = new InventoryPage();
