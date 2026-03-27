@@ -132,7 +132,7 @@ export const config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: "bdd",
-    timeout: 10000,
+    timeout: 5000,
   },
 
   //
@@ -178,8 +178,13 @@ export const config = {
    * @param {Array.<String>} specs List of spec file paths that are to be run
    * @param {string} cid worker id (e.g. 0-0)
    */
-  // beforeSession: function (config, capabilities, specs, cid) {
-  // },
+  beforeSession: function (config, capabilities, specs, cid) {
+    const isSecondUC = specs.some((spec) => spec.includes("uc2"));
+
+    if (isSecondUC) {
+      config.mochaOpts.timeout = 10000; // Increase timeout for UC-2 tests
+    }
+  },
   /**
    * Gets executed before test execution begins. At this point you can access to all global
    * variables like `browser`. It is the perfect place to define custom commands.
