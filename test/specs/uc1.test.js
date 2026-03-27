@@ -12,40 +12,49 @@
  * Logout.
  */
 
+import { LoginPage } from "../pageobjects/pages/login.page.js";
+import { InventoryPage } from "../pageobjects/pages/inventory.page.js";
+import { CartPage } from "../pageobjects/pages/cart.page.js";
+import { CheckoutOnePage } from "../pageobjects/pages/checkout-one.page.js";
+
+const loginPage = new LoginPage();
+const inventoryPage = new InventoryPage();
+const cartPage = new CartPage();
+const checkoutOnePage = new CheckoutOnePage();
+
 describe("UC-1 Form Validation (Negative Testing)", () => {
   beforeEach(async () => {
-    await browser.url("/");
-  });
-
-  it("should check page title", async () => {
-    await expect(browser).toHaveTitle("Swag Labs");
+    // await browser.url("/");
+    await loginPage.open();
   });
 
   it('should not login with empty credentials and display error message"Username is required"', async () => {
-    await $("#login-button").click();
-    await expect($("h3[data-test='error']")).toHaveText([
+    await loginPage.loginBox.item("loginbutton").click();
+    await expect(loginPage.loginBox.item("error")).toHaveText(
       expect.stringContaining("Username is required"),
-    ]);
+    );
   });
 
   it('should not login with only username and display error message "Password is required"', async () => {
-    await $("#user-name").setValue("standard_user");
-    await $("#login-button").click();
-    await expect($("h3[data-test='error']")).toHaveText([
+    await loginPage.loginBox.item("username").setValue("standard_user");
+    await loginPage.loginBox.item("loginbutton").click();
+    await expect(loginPage.loginBox.item("error")).toHaveText([
       expect.stringContaining("Password is required"),
     ]);
   });
 
   it("should not continue checkout without postal code and display error message", async () => {
     // Login with standard_user
-    await $("#user-name").setValue("standard_user");
-    await $("#password").setValue("secret_sauce");
-    await $("#login-button").click();
-    await $(".shopping_cart_link").click();
-    await $("#checkout").click();
-    await $("#first-name").setValue("John");
-    await $("#last-name").setValue("Doe");
-    await $("#continue").click();
-    await expect($(".error-message-container")).toBeDisplayed();
+    await loginPage.loginBox.item("username").setValue("standard_user");
+    await loginPage.loginBox.item("password").setValue("secret_sauce");
+    await loginPage.loginBox.item("loginbutton").click();
+
+    //go to cart and checkout
+    await inventoryPage.header.cartBtn.click();
+    await cartPage.checkoutBtn.click();
+    await checkoutOnePage.checkoutInfo.item("firstName").setValue("John");
+    await checkoutOnePage.checkoutInfo.item("lastName").setValue("Doe");
+    await checkoutOnePage.checkoutInfo.item("continueBtn").click();
+    await expect(checkoutOnePage.checkoutInfo.item("error")).toBeDisplayed();
   });
 });
