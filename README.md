@@ -4,7 +4,7 @@ This repository contains WebdriverIO tests for `https://www.saucedemo.com` in th
 
 ## Author
 
-Siarhei Ramanishkin
+Siarhei Ramanishkin `https://github.com/ramonak93`
 
 ## Prerequisites
 
