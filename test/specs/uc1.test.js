@@ -5,10 +5,12 @@
  * Login with standard_user, go to Checkout, and attempt to continue without filling the postal code. Verify error message.
  */
 
-import { LoginPage } from "../pageobjects/pages/login.page.js";
-import { InventoryPage } from "../pageobjects/pages/inventory.page.js";
-import { CartPage } from "../pageobjects/pages/cart.page.js";
-import { CheckoutOnePage } from "../pageobjects/pages/checkout-one.page.js";
+import {
+  LoginPage,
+  InventoryPage,
+  CartPage,
+  CheckoutOnePage,
+} from "../pageobjects/";
 
 const loginPage = new LoginPage();
 const inventoryPage = new InventoryPage();

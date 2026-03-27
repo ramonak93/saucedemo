@@ -6,16 +6,12 @@ UC-2 Handling Latency (Wait Strategies):
  * Logout.
  */
 
-import { LoginPage } from "../pageobjects/pages/login.page.js";
-import { InventoryPage } from "../pageobjects/pages/inventory.page.js";
-import { CartPage } from "../pageobjects/pages/cart.page.js";
-import { CheckoutOnePage } from "../pageobjects/pages/checkout-one.page.js";
 import { BurgerMenuComponent } from "../pageobjects/components/common/burger-menu.component.js";
+
+import { LoginPage, InventoryPage } from "../pageobjects/";
 
 const loginPage = new LoginPage();
 const inventoryPage = new InventoryPage();
-const cartPage = new CartPage();
-const checkoutOnePage = new CheckoutOnePage();
 const burgerMenu = new BurgerMenuComponent();
 
 describe("UC-2 Handling Latency (Wait Strategies)", () => {

@@ -1,7 +1,9 @@
 import BasePage from "./base.page.js";
-import { Header } from "../components/common/header.component.js";
-import { BurgerMenuComponent } from "../components/common/burger-menu.component.js";
-import { ProductListComponent } from "../components/inventory/product-list.component.js";
+import {
+  Header,
+  BurgerMenuComponent,
+  ProductListComponent,
+} from "../components/index.js";
 
 class InventoryPage extends BasePage {
   constructor() {

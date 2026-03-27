@@ -1,6 +1,5 @@
 import BasePage from "./base.page.js";
-import { Header } from "../components/common/header.component.js";
-import { BurgerMenuComponent } from "../components/common/burger-menu.component.js";
+import { Header, BurgerMenuComponent } from "../components/index.js";
 
 class CartPage extends BasePage {
   constructor() {

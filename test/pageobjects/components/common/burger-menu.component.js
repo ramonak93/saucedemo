@@ -14,6 +14,10 @@ class BurgerMenuComponent extends BaseComponent {
     };
     return this.rootEl.$(selectors[param.toLowerCase()]);
   }
+
+  get closeBtn() {
+    return $("#react-burger-cross-btn");
+  }
 }
 
 export { BurgerMenuComponent };
