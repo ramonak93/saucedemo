@@ -6,13 +6,10 @@ UC-2 Handling Latency (Wait Strategies):
  * Logout.
  */
 
-import { BurgerMenuComponent } from "../pageobjects/components/common/burger-menu.component.js";
-
 import { LoginPage, InventoryPage } from "../pageobjects/";
 
 const loginPage = new LoginPage();
 const inventoryPage = new InventoryPage();
-const burgerMenu = new BurgerMenuComponent();
 
 describe("UC-2 Handling Latency (Wait Strategies)", () => {
   beforeEach(async () => {
@@ -47,7 +44,7 @@ describe("UC-2 Handling Latency (Wait Strategies)", () => {
 
     // Open Burger Menu and wait for menu item
     await inventoryPage.header.burgerMenuBtn.click();
-    await burgerMenu.rootEl.waitForDisplayed();
+    await inventoryPage.burgerMenu.rootEl.waitForDisplayed();
 
     // Reset App State
     await inventoryPage.burgerMenu.item("resetApp").click();
